@@ -7,7 +7,7 @@ export default function Suporte() {
           Precisa de ajuda com o sistema do Hotel Aconchego? Fale com quem cuida da manutenção do app.
         </p>
         <a
-          href="https://wa.me/55"
+             href="https://wa.me/5591992710037"
           target="_blank"
           rel="noreferrer"
           className="text-sm px-4 py-2.5 rounded-lg bg-gold text-bg font-semibold hover:bg-gold-soft transition-colors text-center"

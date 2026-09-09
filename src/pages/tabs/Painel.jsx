@@ -12,6 +12,10 @@ export default function Painel() {
   const [valor, setValor] = useState('')
   const [formaPagamento, setFormaPagamento] = useState('dinheiro')
   const [salvando, setSalvando] = useState(false)
+  const [hospedeNome, setHospedeNome] = useState('')
+  const [hospedeTelefone, setHospedeTelefone] = useState('')
+  const [formaChegada, setFormaChegada] = useState('uber')
+  const [placaVeiculo, setPlacaVeiculo] = useState('')
 
   useEffect(() => {
     let ativo = true
@@ -51,6 +55,10 @@ export default function Painel() {
     if (quarto.status === 'livre') {
       setValor('')
       setFormaPagamento('dinheiro')
+      setHospedeNome('')
+      setHospedeTelefone('')
+      setFormaChegada('uber')
+      setPlacaVeiculo('')
       setModal({ tipo: 'ocupar', quarto })
     } else if (quarto.status === 'ocupado') {
       setValor('')
@@ -67,7 +75,8 @@ export default function Painel() {
   }
 
   async function atualizarStatusQuarto(quartoId, status) {
-    await pb.collection('quartos').update(quartoId, { status })
+    const atualizado = await pb.collection('quartos').update(quartoId, { status })
+    setQuartos((atual) => atual.map((q) => (q.id === quartoId ? atualizado : q)))
   }
 
   async function confirmarOcupar() {
@@ -78,6 +87,10 @@ export default function Painel() {
       colaborador: sessao.colaboradorId ?? null,
       check_in: new Date().toISOString(),
       status: 'aberta',
+      hospede_nome: hospedeNome,
+      hospede_telefone: hospedeTelefone,
+      forma_chegada: formaChegada,
+      placa_veiculo: placaVeiculo,
     })
     await atualizarStatusQuarto(quarto.id, 'ocupado')
     setSalvando(false)
@@ -151,16 +164,61 @@ export default function Painel() {
 
       {modal?.tipo === 'ocupar' && (
         <Modal titulo={`Ocupar ${modal.quarto.nome}`} onClose={() => setModal(null)}>
-          <p className="text-sm text-muted mb-4">
-            O quarto será marcado como ocupado. Você registra o valor recebido na finalização.
-          </p>
-          <button
-            onClick={confirmarOcupar}
-            disabled={salvando}
-            className="w-full px-4 py-3 rounded-lg bg-gold text-bg font-semibold hover:bg-gold-soft transition-colors disabled:opacity-60"
-          >
-            {salvando ? 'Salvando...' : 'Confirmar ocupação'}
-          </button>
+          <div className="flex flex-col gap-3">
+            <label className="text-sm text-muted">
+              Nome do hóspede
+              <input
+                type="text"
+                value={hospedeNome}
+                onChange={(e) => setHospedeNome(e.target.value)}
+                placeholder="Nome completo"
+                className="mt-1 w-full px-4 py-3 rounded-lg border border-border bg-surface-2 text-cream outline-none focus:border-gold"
+              />
+            </label>
+            <label className="text-sm text-muted">
+              Telefone do hóspede
+              <input
+                type="text"
+                value={hospedeTelefone}
+                onChange={(e) => setHospedeTelefone(e.target.value)}
+                placeholder="(00) 00000-0000"
+                className="mt-1 w-full px-4 py-3 rounded-lg border border-border bg-surface-2 text-cream outline-none focus:border-gold"
+              />
+            </label>
+            <label className="text-sm text-muted">
+              Forma de chegada
+              <select
+                value={formaChegada}
+                onChange={(e) => setFormaChegada(e.target.value)}
+                className="mt-1 w-full px-4 py-3 rounded-lg border border-border bg-surface-2 text-cream outline-none focus:border-gold"
+              >
+                <option value="uber">Uber</option>
+                <option value="moto">Moto</option>
+                <option value="carro">Carro</option>
+                <option value="outros">Outros</option>
+              </select>
+            </label>
+            <label className="text-sm text-muted">
+              Placa do veículo
+              <input
+                type="text"
+                value={placaVeiculo}
+                onChange={(e) => setPlacaVeiculo(e.target.value)}
+                placeholder="ABC-1234"
+                className="mt-1 w-full px-4 py-3 rounded-lg border border-border bg-surface-2 text-cream outline-none focus:border-gold"
+              />
+            </label>
+            <p className="text-sm text-muted">
+              O quarto será marcado como ocupado. Você registra o valor recebido na finalização.
+            </p>
+            <button
+              onClick={confirmarOcupar}
+              disabled={salvando}
+              className="w-full px-4 py-3 rounded-lg bg-gold text-bg font-semibold hover:bg-gold-soft transition-colors disabled:opacity-60"
+            >
+              {salvando ? 'Salvando...' : 'Confirmar ocupação'}
+            </button>
+          </div>
         </Modal>
       )}
 

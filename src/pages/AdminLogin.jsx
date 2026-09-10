@@ -32,7 +32,7 @@ export default function AdminLogin({ onVoltar }) {
         </div>
 
         <h1 className="font-display text-xl text-cream mb-1">Acesso do administrador</h1>
-        <p className="text-sm text-muted mb-6">Entre com o e-mail e senha cadastrados no PocketBase</p>
+        <p className="text-sm text-muted mb-6">Entre com seu e-mail e senha para acessar o sistema.</p>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <input

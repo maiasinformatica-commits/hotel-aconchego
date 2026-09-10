@@ -161,6 +161,19 @@
         "type": "text"
       },
       {
+        "help": "",
+        "hidden": false,
+        "id": "number2210983741",
+        "max": null,
+        "min": 0,
+        "name": "valor_diaria",
+        "onlyInt": false,
+        "presentable": false,
+        "required": false,
+        "system": false,
+        "type": "number"
+      },
+      {
         "hidden": false,
         "id": "autodate2990389176",
         "name": "created",
@@ -256,6 +269,18 @@
         "max": "",
         "min": "",
         "name": "check_out",
+        "presentable": false,
+        "required": false,
+        "system": false,
+        "type": "date"
+      },
+      {
+        "help": "",
+        "hidden": false,
+        "id": "date1873654920",
+        "max": "",
+        "min": "",
+        "name": "checkout_previsto",
         "presentable": false,
         "required": false,
         "system": false,

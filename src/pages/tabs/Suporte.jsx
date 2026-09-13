@@ -3,9 +3,10 @@ export default function Suporte() {
     <div className="max-w-md">
       <h2 className="text-xs uppercase tracking-wider text-muted mb-3">Suporte</h2>
       <div className="rounded-xl border border-border bg-surface p-5 flex flex-col gap-3">
-        <p className="text-sm text-cream">
-          Precisa de ajuda com o sistema? Nossa equipe de suporte está à disposição para ajudar você.
-        </p>
+        <div className="text-sm text-cream">
+          <p className="font-medium">Precisa de ajuda com o sistema?</p>
+          <p className="mt-1 text-muted">Nossa equipe de suporte está à disposição para ajudar você.</p>
+        </div>
         <a
           href="https://wa.me/5591992710037"
           target="_blank"

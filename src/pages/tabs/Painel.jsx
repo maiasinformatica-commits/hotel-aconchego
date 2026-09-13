@@ -14,6 +14,11 @@ export default function Painel() {
   const [salvando, setSalvando] = useState(false)
   const [hospedeNome, setHospedeNome] = useState('')
   const [hospedeTelefone, setHospedeTelefone] = useState('')
+  const [hospedeCpf, setHospedeCpf] = useState('')
+  const [hospedeRg, setHospedeRg] = useState('')
+  const [hospedeEmail, setHospedeEmail] = useState('')
+  const [hospedeEndereco, setHospedeEndereco] = useState('')
+  const [hospedeNascimento, setHospedeNascimento] = useState('')
   const [formaChegada, setFormaChegada] = useState('uber')
   const [placaVeiculo, setPlacaVeiculo] = useState('')
 
@@ -57,6 +62,11 @@ export default function Painel() {
       setFormaPagamento('dinheiro')
       setHospedeNome('')
       setHospedeTelefone('')
+      setHospedeCpf('')
+      setHospedeRg('')
+      setHospedeEmail('')
+      setHospedeEndereco('')
+      setHospedeNascimento('')
       setFormaChegada('uber')
       setPlacaVeiculo('')
       setModal({ tipo: 'ocupar', quarto })
@@ -89,6 +99,11 @@ export default function Painel() {
       status: 'aberta',
       hospede_nome: hospedeNome,
       hospede_telefone: hospedeTelefone,
+      hospede_cpf: hospedeCpf,
+      hospede_rg: hospedeRg,
+      hospede_email: hospedeEmail,
+      hospede_endereco: hospedeEndereco,
+      hospede_nascimento: hospedeNascimento || null,
       forma_chegada: formaChegada,
       placa_veiculo: placaVeiculo,
     })
@@ -182,6 +197,55 @@ export default function Painel() {
                 value={hospedeTelefone}
                 onChange={(e) => setHospedeTelefone(e.target.value)}
                 placeholder="(00) 00000-0000"
+                className="mt-1 w-full px-4 py-3 rounded-lg border border-border bg-surface-2 text-cream outline-none focus:border-gold"
+              />
+            </label>
+            <label className="text-sm text-muted">
+              CPF do hóspede (opcional)
+              <input
+                type="text"
+                value={hospedeCpf}
+                onChange={(e) => setHospedeCpf(e.target.value)}
+                placeholder="000.000.000-00"
+                className="mt-1 w-full px-4 py-3 rounded-lg border border-border bg-surface-2 text-cream outline-none focus:border-gold"
+              />
+            </label>
+            <label className="text-sm text-muted">
+              RG do hóspede (opcional)
+              <input
+                type="text"
+                value={hospedeRg}
+                onChange={(e) => setHospedeRg(e.target.value)}
+                placeholder="00.000.000-0"
+                className="mt-1 w-full px-4 py-3 rounded-lg border border-border bg-surface-2 text-cream outline-none focus:border-gold"
+              />
+            </label>
+            <label className="text-sm text-muted">
+              E-mail do hóspede (opcional)
+              <input
+                type="email"
+                value={hospedeEmail}
+                onChange={(e) => setHospedeEmail(e.target.value)}
+                placeholder="hospede@email.com"
+                className="mt-1 w-full px-4 py-3 rounded-lg border border-border bg-surface-2 text-cream outline-none focus:border-gold"
+              />
+            </label>
+            <label className="text-sm text-muted">
+              Endereço completo (opcional)
+              <input
+                type="text"
+                value={hospedeEndereco}
+                onChange={(e) => setHospedeEndereco(e.target.value)}
+                placeholder="Rua, número, bairro, cidade - UF"
+                className="mt-1 w-full px-4 py-3 rounded-lg border border-border bg-surface-2 text-cream outline-none focus:border-gold"
+              />
+            </label>
+            <label className="text-sm text-muted">
+              Data de nascimento (opcional)
+              <input
+                type="date"
+                value={hospedeNascimento}
+                onChange={(e) => setHospedeNascimento(e.target.value)}
                 className="mt-1 w-full px-4 py-3 rounded-lg border border-border bg-surface-2 text-cream outline-none focus:border-gold"
               />
             </label>
